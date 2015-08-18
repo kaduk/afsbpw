@@ -1,0 +1,58 @@
+\documentclass{beamer}
+
+\usepackage{graphicx}
+\usepackage{beamerthemesplit}
+\title{Updates from MIT Kerberos}
+\author{Benjamin Kaduk \\ \strikethrough{\url{kaduk@mit.edu}} \url{bkaduk@akamai.com}}
+\date{20 August, 2015}
+
+\begin{document}
+
+\AtBeginSection[]
+{
+    \begin{frame}
+	\tableofcontents[currentsection]
+    \end{frame}
+}
+
+\frame{\titlepage}
+
+\section{Ancient History (pre-2012)}
+
+\begin{frame}[fragile]
+\frametitle{Features released before EAKC 2012}
+\begin{itemize}
+\item{krb5 1.9 --- December 2010}
+\item{krb5 1.10 --- January 2012}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Expected krb5-1.13 features}
+\begin{itemize}
+\item{HTTP(S) transport --- MS-KKDCP HTTP proxy}
+\item{Hierarchical iprop}
+\item{more (but we're not sure exactly what, yet)}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Long-term goals}
+\begin{itemize}
+\item{Stop relying on the DNS!}
+\item{Let the KDC do name resolution; it can have a copy of the zone, or a
+	secure path to the nameserver, or similar}
+\item{CAMMAC and PAD, akin to the MSFT PAC}
+\item{Pluggable interface for kadmin ACLs}
+\item{API or KCM-like credentials cache}
+\item{Python krb5 implementation for flexible testing}
+\item{much more}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{}
+\Large{Thanks!}
+\end{frame}
+
+\end{document}
