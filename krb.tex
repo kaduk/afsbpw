@@ -2,8 +2,9 @@
 
 \usepackage{graphicx}
 \usepackage{beamerthemesplit}
+\usepackage[normalem]{ulem}
 \title{Updates from MIT Kerberos}
-\author{Benjamin Kaduk \\ \strikethrough{\url{kaduk@mit.edu}} \url{bkaduk@akamai.com}}
+%\author{Benjamin Kaduk \\ \sout{\url{kaduk@mit.edu}} \url{bkaduk@akamai.com}}
 \date{20 August, 2015}
 
 \begin{document}
@@ -58,7 +59,7 @@ Freshly released for EAKC 2014, but a quick recap:
 \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{krb5-1.13 features}
 \begin{itemize}
 \item{HTTP(S) transport --- MS-KKDCP HTTP proxy}
@@ -85,7 +86,7 @@ Freshly released for EAKC 2014, but a quick recap:
 \end{frame}
 
 \begin{frame}
-[details of these features]
+details of these features
 \end{frame}
 
 \begin{frame}
@@ -111,7 +112,7 @@ MITKRB5-SA-2014-001:
 \end{itemize}
 MITKRB5-SA-2015-001
 \begin{itemize}
-\item{CVE-2014-5352: gss_process_context_token() incorrectly frees context}
+\item{CVE-2014-5352: gss\_process\_context\_token() incorrectly frees context}
 \item{CVE-2014-9421: kadmind doubly frees partial deserialization results}
 \item{CVE-2014-9422: kadmind incorrectly validates server principal name}
 \item{CVE-2014-9423: libgssrpc server applications leak uninitialized bytes}
@@ -134,7 +135,7 @@ MITKRB5-SA-2015-001
 \item{CAMMAC}
 \item{Authentication Indicator}
 \item{Hopefully, a reporting-friendly dump format}
-\item{gss_acquire_cred_with_password behavior change}
+\item{gss\_acquire\_cred\_with\_password behavior change}
 \item{make \verb+FILE:+ cache somewhat more efficient}
 \item{Don't generate new des3 and arcfour keys by default}
 \item{Option for site-specific error message wrapping, and include the
@@ -158,7 +159,7 @@ MITKRB5-SA-2015-001
 \end{frame}
 
 \begin{frame}
-[details on features]
+details on features
 \end{frame}
 
 \section{On the horizon}
@@ -184,7 +185,7 @@ MITKRB5-SA-2015-001
 \frametitle{KfW 4.1 outline}
 \begin{itemize}
 \item{KfW 4.0 (based off krb5-1.10) was released in 2012}
-\item{\strikethrough{Time}past time for an update}
+\item{\sout{Time}past time for an update}
 \item{Based off krb5-1.13}
 \item{Waiting for feedback from testers to release}
 \item{Please test KfW 4.1 beta 2!}
