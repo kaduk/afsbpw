@@ -17,24 +17,192 @@
 
 \frame{\titlepage}
 
-\section{Ancient History (pre-2012)}
+\section{While we were gone\ldots{}}
 
 \begin{frame}[fragile]
-\frametitle{Features released before EAKC 2012}
+\frametitle{Things you should know about but might have missed}
 \begin{itemize}
-\item{krb5 1.9 --- December 2010}
-\item{krb5 1.10 --- January 2012}
+\item{\verb+KRB5\_TRACE+}
+\item{kadmin purgekeys for krbtgt rekeying}
+\item{\verb+DIR:+ ccache type and collection-enabled ccaches}
+\item{GSS acceptors can wildcard hostname part of host-based service}
+\item{client keytabs}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{krb5-1.12}
+Freshly released for EAKC 2014, but a quick recap:
+\begin{itemize}
+\item{More plugin interfaces: aname-to-lname, kuserok, host-realm,
+	default-realm}
+\item{KDB policy records are more flexible; no refcounts $\rightarrow$
+	better performance}
+\item{Support principals with no long-term keys (e.g., for OTP/PKINIT)}
+\item{KDC support for FAST OTP (RFC 6560)}
+\item{Improvents to the \verb+KEYRING:+ cache, including collection support}
+\item{AES-NI when available}
+\item{Experimental KDC audit pluggable interface}
+\end{itemize}
+\end{frame}
+
+\section{Latest Release, 1.13}
+
+\begin{frame}
+\frametitle{Schedule}
+\begin{itemize}
+\item{Shortened 10-month release cycle (1 year is normal)}
+\item{Released on-schedule October 15, 2014}
+\item{Should align better with OS releases (Fedora, Ubuntu, etc.)}
+\item{(krb5-1.14 is expected in October 2015)}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Expected krb5-1.13 features}
+\frametitle{krb5-1.13 features}
 \begin{itemize}
 \item{HTTP(S) transport --- MS-KKDCP HTTP proxy}
 \item{Hierarchical iprop}
-\item{more (but we're not sure exactly what, yet)}
+\item{Support for configuring GSS mechanisms via \verb+/etc/gss/mech.d/*.conf+}
+\item{Support for SASL binds in the LDAP KDB backend}
+\item{KDC listens on TCP by default}
+\item{KCM: cache type for Heimdal (e.g., OS X) compatibility}
+\item{Support for ulocked database dumps for the DB2 KDB backend, to allow
+	the KDC and kadmind to continue processing requests during dumps}
 \end{itemize}
 \end{frame}
+
+\begin{frame}
+\frametitle{Late-breaking news in krb5-1.13}
+\begin{itemize}
+\item{SPNEGO improvements for out-of tree mechs (e.g., NTLM)}
+\item{fix build against libressl}
+\item{ksu cleanup (but maybe you shouldn't use ksu)}
+\item{KDC logging works with redirected stderr}
+\item{Incremental improvements to the replay cache performance and
+	correctness}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+[details of these features]
+\end{frame}
+
+\begin{frame}
+\frametitle{replay cache}
+Some protocols can be designed to not need a replay cache (by using
+an acceptor subkey or other key confirmation methods).
+
+For safety and correctness, other protocols need a cache to detect and
+avoid replay attacks.  MIT krb5 supplies such an implementation at the
+library level, but the implementation is not very performant.
+
+Is replay cache performance an issue for anyone here?  Please talk to us!
+\end{frame}
+
+\subsection{Security}
+
+\begin{frame}[fragile]
+\frametitle{Security Advisories}
+MITKRB5-SA-2014-001:
+\begin{itemize}
+\item{CVE-2014-4345: Buffer overrun in kadmind with LDAP backend}
+\item{\verb+cpw -keepold+ triggere miscounding of array size}
+\end{itemize}
+MITKRB5-SA-2015-001
+\begin{itemize}
+\item{CVE-2014-5352: gss_process_context_token() incorrectly frees context}
+\item{CVE-2014-9421: kadmind doubly frees partial deserialization results}
+\item{CVE-2014-9422: kadmind incorrectly validates server principal name}
+\item{CVE-2014-9423: libgssrpc server applications leak uninitialized bytes}
+\end{itemize}
+\end{frame}
+
+\section{Coming soon\ldots{}}
+
+\begin{frame}
+\frametitle{Upcoming items from MIT Kerberos}
+\begin{itemize}
+\item{krb5-1.14 in October}
+\item{KfW 4.1 expected \ldots sometime this year}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{krb5-1.14 features}
+\begin{itemize}
+\item{CAMMAC}
+\item{Authentication Indicator}
+\item{Hopefully, a reporting-friendly dump format}
+\item{gss_acquire_cred_with_password behavior change}
+\item{make \verb+FILE:+ cache somewhat more efficient}
+\item{Don't generate new des3 and arcfour keys by default}
+\item{Option for site-specific error message wrapping, and include the
+	\verb+FILE:+ ccache name in errors}
+\item{Use Linux OFD locks when available}
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{krb5-1.14 features (continued)}
+\begin{itemize}
+\item{(developers only) note skipped tests in \verb+make check+ output}
+\item{Incremental improvements to multi-hop preauthentication}
+\item{document \verb+FILE:+ ccache and keytab file formats}
+\item{Support 32-bit kvno keytab extensions}
+\item{Log a notice when kadm5.acl fails to parse}
+\item{Disallow principal renames with LDAP backend}
+\item{Improvements to incremental database propogation}
+\item{Limit use of ``old'' and ``wrong'' krb5 mechanism OIDs}
+\item{Limit use of IAKERB}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+[details on features]
+\end{frame}
+
+\section{On the horizon}
+
+\begin{frame}
+\frametitle{Candidates for krb5-1.15}
+\begin{itemize}
+\item{SPAKE preauth}
+	\begin{itemize}
+	\item{forward secrecy in generated session keys}
+	\item{option for two-factor as part of same exchange}
+	\item{When configured properly, attacker can't tell which factor was
+		wrong}
+	\end{itemize}
+\item{More progress on Python kerberos for testing?}
+\item{More progress on moving DNS resolution off clients to the KDC}
+\end{itemize}
+\end{frame}
+
+\section{KfW}
+
+\begin{frame}
+\frametitle{KfW 4.1 outline}
+\begin{itemize}
+\item{KfW 4.0 (based off krb5-1.10) was released in 2012}
+\item{\strikethrough{Time}past time for an update}
+\item{Based off krb5-1.13}
+\item{Waiting for feedback from testers to release}
+\item{Please test KfW 4.1 beta 2!}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{KfW 4.1 features}
+\begin{itemize}
+\item{Improved support for MSLSA: ccache type}
+\item{New library for ribbon interface, more accessible for screen readers}
+\item{Registry key for default realm}
+\item{Modernization in installer sources}
+\item{All the features from krb5 1.11 through krb5 1.13}
+\end{itemize}
+\end{frame}
+
+\section{A bit further off}
 
 \begin{frame}
 \frametitle{Long-term goals}
@@ -42,10 +210,9 @@
 \item{Stop relying on the DNS!}
 \item{Let the KDC do name resolution; it can have a copy of the zone, or a
 	secure path to the nameserver, or similar}
-\item{CAMMAC and PAD, akin to the MSFT PAC}
+\item{PAD, akin to the MSFT PAC}
 \item{Pluggable interface for kadmin ACLs}
 \item{API or KCM-like credentials cache}
-\item{Python krb5 implementation for flexible testing}
 \item{much more}
 \end{itemize}
 \end{frame}
