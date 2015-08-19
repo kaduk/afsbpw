@@ -4,7 +4,7 @@
 \usepackage{beamerthemesplit}
 \usepackage[normalem]{ulem}
 \title{Updates from MIT Kerberos}
-%\author{Benjamin Kaduk \\ \sout{\url{kaduk@mit.edu}} \url{bkaduk@akamai.com}}
+\author{Benjamin Kaduk \\ \url{kaduk@mit.edu} \url{bkaduk@akamai.com}}
 \date{20 August, 2015}
 
 \begin{document}
@@ -23,7 +23,7 @@
 \begin{frame}[fragile]
 \frametitle{Things you should know about but might have missed}
 \begin{itemize}
-\item{\verb+KRB5\_TRACE+}
+\item{\verb+KRB5_TRACE+}
 \item{kadmin purgekeys for krbtgt rekeying}
 \item{\verb+DIR:+ ccache type and collection-enabled ccaches}
 \item{GSS acceptors can wildcard hostname part of host-based service}
@@ -47,7 +47,7 @@ Freshly released for EAKC 2014, but a quick recap:
 \end{itemize}
 \end{frame}
 
-\section{Latest Release, 1.13}
+\section{Current release (1.13)}
 
 \begin{frame}
 \frametitle{Schedule}
@@ -94,10 +94,12 @@ details of these features
 Some protocols can be designed to not need a replay cache (by using
 an acceptor subkey or other key confirmation methods).
 
+\vspace{1em}
 For safety and correctness, other protocols need a cache to detect and
 avoid replay attacks.  MIT krb5 supplies such an implementation at the
 library level, but the implementation is not very performant.
 
+\vspace{1em}
 Is replay cache performance an issue for anyone here?  Please talk to us!
 \end{frame}
 
@@ -128,6 +130,8 @@ MITKRB5-SA-2015-001
 \item{KfW 4.1 expected \ldots sometime this year}
 \end{itemize}
 \end{frame}
+
+\subsection{krb5-1.14}
 
 \begin{frame}[fragile]
 \frametitle{krb5-1.14 features}
@@ -162,30 +166,13 @@ MITKRB5-SA-2015-001
 details on features
 \end{frame}
 
-\section{On the horizon}
-
-\begin{frame}
-\frametitle{Candidates for krb5-1.15}
-\begin{itemize}
-\item{SPAKE preauth}
-	\begin{itemize}
-	\item{forward secrecy in generated session keys}
-	\item{option for two-factor as part of same exchange}
-	\item{When configured properly, attacker can't tell which factor was
-		wrong}
-	\end{itemize}
-\item{More progress on Python kerberos for testing?}
-\item{More progress on moving DNS resolution off clients to the KDC}
-\end{itemize}
-\end{frame}
-
-\section{KfW}
+\subsection{KfW}
 
 \begin{frame}
 \frametitle{KfW 4.1 outline}
 \begin{itemize}
 \item{KfW 4.0 (based off krb5-1.10) was released in 2012}
-\item{\sout{Time}past time for an update}
+\item{\sout{Time} past time for an update}
 \item{Based off krb5-1.13}
 \item{Waiting for feedback from testers to release}
 \item{Please test KfW 4.1 beta 2!}
@@ -203,15 +190,44 @@ details on features
 \end{itemize}
 \end{frame}
 
+\section{On the horizon}
+
+\begin{frame}
+\frametitle{Candidates for krb5-1.15}
+\begin{itemize}
+\item{SPAKE preauth}
+	\begin{itemize}
+	\item{forward secrecy in generated session keys}
+	\item{option for two-factor as part of same exchange}
+	\item{When configured properly, attacker can't tell which factor was
+		wrong}
+	\end{itemize}
+\item{More progress on Python kerberos for testing?}
+\item{More progress on moving DNS resolution off clients to the KDC}
+\end{itemize}
+\end{frame}
+
 \section{A bit further off}
+
+\begin{frame}
+\frametitle{Ongoing in the IETF}
+\begin{itemize}
+\item{PAD, akin to the MSFT PAC}
+\item{New (faster?) enctypes}
+\item{Java GSS bindings updates (streams?  no streams?)}
+\item{Deprecate des3 and arcfour}
+\item{PKINIT algorithm agility}
+\item{Extra round trips for AP exchange}
+\item{Convince us to take on your idea!}
+\end{itemize}
+\end{frame}
 
 \begin{frame}
 \frametitle{Long-term goals}
 \begin{itemize}
 \item{Stop relying on the DNS!}
-\item{Let the KDC do name resolution; it can have a copy of the zone, or a
-	secure path to the nameserver, or similar}
-\item{PAD, akin to the MSFT PAC}
+\item{Let the KDC do the resolution, possibly via a local (trusted) copy
+	of the zone file}
 \item{Pluggable interface for kadmin ACLs}
 \item{API or KCM-like credentials cache}
 \item{much more}
