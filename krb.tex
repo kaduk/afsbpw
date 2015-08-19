@@ -86,7 +86,13 @@ Freshly released for EAKC 2014, but a quick recap:
 \end{frame}
 
 \begin{frame}
-details of these features
+\frametitle{MS-KKDCP}
+\begin{itemize}
+\item{HTTPS transport, reduces plaintext leakage}
+\item{Proxy can in principle filter out bogus requests, and gateway into DMZ}
+\item{Lets clients talk to KDCs that might otherwise be unreachable}
+\item{Kind of like IAKERB, but\ldots{}actually deployed}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -163,7 +169,30 @@ MITKRB5-SA-2015-001
 \end{frame}
 
 \begin{frame}
-details on features
+\frametitle{CAMMAC}
+\begin{itemize}
+\item{Signed authorization data, originating from KDC}
+\item{Can be safely passed back to KDC for processing, unlike
+	AD-KDC-ISSUED}
+\item{Generic container, can be used for authentication indicator,
+	PAD, storing other data only available at initial authenticaiton,
+	\ldots{}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Authentication Indicator}
+\begin{itemize}
+\item{Client principals could have multiple usable preauth mechanisms}
+\item{Services want to know how (strong) the initial authentication was}
+\item{encrypted timestamp is fine for mail, but need OTP for payroll access,
+	or PKINIT for making changes in puppet}
+\item{Carried in a CAMMAC to prevent tampering}
+\item{A string identifier (readable, but ``opaque'' to machines) for
+	the initial authentication}
+\item{Different OTP schemes can get different strings (e.g., hardware token
+	vs. app on phone}
+\end{itemize}
 \end{frame}
 
 \subsection{KfW}
@@ -190,7 +219,7 @@ details on features
 \end{itemize}
 \end{frame}
 
-\section{On the horizon}
+\subsection{On the horizon}
 
 \begin{frame}
 \frametitle{Candidates for krb5-1.15}
@@ -207,7 +236,7 @@ details on features
 \end{itemize}
 \end{frame}
 
-\section{A bit further off}
+\subsection{A bit further off}
 
 \begin{frame}
 \frametitle{Ongoing in the IETF}
