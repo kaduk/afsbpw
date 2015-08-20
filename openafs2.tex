@@ -141,8 +141,8 @@ should only be done at a major release boundary.}
 \frametitle{What's in 1.8?}
 Already on master:
 \begin{itemize}
-\item{Code cleanup (e.g., from static analyzers, compiler warnings fixes,
-and general refactoring) --- thanks, Simon!}
+\item{Code cleanup/robustness (e.g., from static analyzers, compiler
+warnings fixes, and general refactoring) --- thanks, Simon!}
 \item{libtool in the build system for more reliable shared libraries,
 and other build system cleanup}
 \item{pthreaded dbservers}
@@ -160,6 +160,20 @@ and other build system cleanup}
 \item{New default for ihandle sync-ing behavior}
 \item{Jenkins hash in XXX}
 \item{Some bosserver refactoring}
+\item{Ability to control ugen/ubik client flags more closely}
+\item{memcache improvements}
+\item{rxgen per-opcode stats}
+\item{openafs-client.conf and openafs-server.conf}
+\item{opr_Assert() vs. opr_Verify()}
+\item{More dbserver threads by default}
+\item{buserver uses libutil's logging (format changes)}
+\item{other changes to server logging}
+\item{CacheTruncateDaemon improvements}
+\item{Use Heimdal's rand-fortuna in the kernel}
+\item{ptserver wire format arrays' length is capped}
+\item{bos, pts emit error messages on stderr (not stdout)}
+\item{vos remaddrs}
+\item{opr_softsig}
 \end{itemize}
 \end{frame}
 
@@ -176,6 +190,11 @@ QuickStartGuide}
 \item{\verb+afsd -settime+}
 \item{\verb+libjuafs.a+ --- just use \verb+libuafs.a+}
 \item{LWP fileserver}
+\item{Cruft from MR-AFS in the bos utility}
+\item{Netscape plugin (what is it???)}
+\item{a \verb+-k+ argument to the fileserver}
+\item{ZFS_BOZONLOCK_ENV}
+\item{sunrpc compatibility in rxgen}
 \end{itemize}
 \end{frame}
 
