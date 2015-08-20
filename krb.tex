@@ -78,7 +78,8 @@ Freshly released for EAKC 2014, but a quick recap:
 \begin{itemize}
 \item{SPNEGO improvements for out-of tree mechs (e.g., NTLM)}
 \item{fix build against libressl}
-\item{ksu cleanup (but maybe you shouldn't use ksu)}
+\item{ksu cleanup \pause (but maybe you shouldn't use ksu)}
+\pause
 \item{KDC logging works with redirected stderr}
 \item{Incremental improvements to the replay cache performance and
 	correctness}
@@ -118,11 +119,15 @@ MITKRB5-SA-2014-001:
 \item{CVE-2014-4345: Buffer overrun in kadmind with LDAP backend}
 \item{\verb+cpw -keepold+ triggered miscounting of array size}
 \end{itemize}
+\pause
 MITKRB5-SA-2015-001
 \begin{itemize}
 \item{CVE-2014-5352: gss\_process\_context\_token() incorrectly frees context}
+\pause
 \item{CVE-2014-9421: kadmind doubly frees partial deserialization results}
+\pause
 \item{CVE-2014-9422: kadmind incorrectly validates server principal name}
+\pause
 \item{CVE-2014-9423: libgssrpc server applications leak uninitialized bytes}
 \end{itemize}
 \end{frame}
@@ -184,12 +189,17 @@ MITKRB5-SA-2015-001
 \frametitle{Authentication Indicator}
 \begin{itemize}
 \item{Client principals could have multiple usable preauth mechanisms}
+\pause
 \item{Services want to know how (strong) the initial authentication was}
-\item{encrypted timestamp is fine for mail, but need OTP for payroll access,
+\pause
+\item{Encrypted timestamp is fine for mail, but need OTP for payroll access,
 	or PKINIT for making changes in puppet}
+\pause
 \item{Carried in a CAMMAC to prevent tampering}
+\pause
 \item{A string identifier (readable, but ``opaque'' to machines) for
 	the initial authentication}
+\pause
 \item{Different OTP schemes can get different strings (e.g., hardware token
 	vs. app on phone}
 \end{itemize}
@@ -233,6 +243,7 @@ MITKRB5-SA-2015-001
 	\item{For simple second factors, attacker can't tell which factor was
 		wrong}
 	\end{itemize}
+\pause
 \item{More progress on Python kerberos for testing?}
 \item{More progress on moving DNS resolution off clients to the KDC}
 \end{itemize}
