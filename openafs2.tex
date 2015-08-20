@@ -158,7 +158,6 @@ and other build system cleanup}
 \item{cmd refactoring}
 \item{Something resembling a test suite framework}
 \item{New default for ihandle sync-ing behavior}
-\item{Jenkins hash in XXX}
 \item{Some bosserver refactoring}
 \item{Ability to control ugen/ubik client flags more closely}
 \item{memcache improvements}
@@ -167,13 +166,72 @@ and other build system cleanup}
 \item{opr_Assert() vs. opr_Verify()}
 \item{More dbserver threads by default}
 \item{buserver uses libutil's logging (format changes)}
-\item{other changes to server logging}
+\item{other changes to server logging, rotation}
 \item{CacheTruncateDaemon improvements}
 \item{Use Heimdal's rand-fortuna in the kernel}
 \item{ptserver wire format arrays' length is capped}
 \item{bos, pts emit error messages on stderr (not stdout)}
 \item{vos remaddrs}
 \item{opr_softsig}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{In gerrit ready to be merged}
+% 38 changes
+\includegraphics[width=2.5in]{gerrit-approved}
+\end{frame}
+
+\begin{frame}
+\frametitle{In gerrit ready to be merged}
+38 changes with good code review.
+\vspace{1em}
+Need to actually get merged
+
+\begin{frame}
+\frametitle{In gerrit ready to be merged}
+\begin{itemize}
+\item{Jenkins hash in volume, vnode, vcache, dcache hash tables}
+\item{Subnet ranges in NetInfo/NetRestrict}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{In gerrit needing review}
+%54 changes
+\includegraphics[width=2.5in]{gerrit-needsreview}
+\end{frame}
+
+\begin{frame}
+\frametitle{In gerrit needing review}
+54 changes (just barely on two pages)
+\begin{itemize}
+\item{update bos restricted mode}
+\item{encrypt inter-volser traffic}
+\item{Revert "Lockless path through afs_linux_dentry_revalidate"}
+\item{afs: Don't retry timed-out RW operations forever}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{In gerrit needing rework}
+% 33 changes
+\includegraphics[width=2.5in]{gerrit-minusone}
+\end{frame}
+
+\begin{frame}
+\frametitle{In gerrit needing rework}
+33 changes with $-1$ review
+\begin{itemize}
+\item{viced: prevent useless salvages when AFS config is invalid}
+\item{auth: Add negative caching to afsconf_LookupServer()}
+\item{convert servers to the opr softsig}
+\item{Fast restart for Ubik database servers}
+\pause
+\item{Attempt to auto-tune fileserver for memory target}
+\item{Provide a usable fileserver default config (-X)}
+\pause
+\item{p_osi_sleep make afs_osi_Wait interruptible by ctrl-C}
 \end{itemize}
 \end{frame}
 
@@ -200,6 +258,51 @@ QuickStartGuide}
 
 \section{Getting to 2.0}
 
+\subsection{rxgk}
+
+\begin{frame}
+\frametitle{Specification}
+\includegraphics[width=2.5in]{rxgk-afs-snapshot}
+\end{frame}
+
+\begin{frame}
+\frametitle{Implementation}
+\includegraphics[width=2.5]{gerrit-rxgk.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Implementation}
+\url{https://github.com/kaduk/openafs/commits/rxgkng}
+\includegraphics[width=2.5]{github-rxgk}
+\end{frame}
+
+\subsection{IPv6}
+
+\begin[shrink=-50]{frame}
+\frametitle{Specification}
+\verb+'()+
+\end{frame}
+
+\begin{frame}
+\frametitle{Implementation}
+\includegraphics[width=2.5in]{gerrit-ipv6}
+
+\begin{frame}
+\frametitle{Implementation}
+\includegraphics[width=2.5in]{iceberg}
+\end{frame}
+
+\subsection{\ldots}
+
+\begin{frame}
+\frametitle{Your Feature Here}
+\begin{itemize}
+\item{\sout{read-write replication}}
+\item{\sout{per-file ACLs}}
+\item{\ldots}
+\end{itemize}
+\end{frame}
+
 \begin{frame}
 \frametitle{}
 \Large{Thanks!}
@@ -207,14 +310,5 @@ QuickStartGuide}
 
 \end{document}
 
-% rxgk and IPv6 support have been discussed as highly desirable features for
-% AFS-3 implementations for many years now, but implementations in a
-% released version of OpenAFS remain elusive.  OpenAFS 2.0 has been defined
-% as the version which will include rxgk support for almost a decade, but
-% we're still not there yet.  This talk will summarize the current state of
-% affairs of rxgk and IPv6, what remains to bring them to OpenAFS, what else
-% might be included in a 2.0 release, and what will need to be done along
-% the way.  The path to 2.0 will go through a 1.8 series of stable Unix
-% releases, with its own set of new features, which will also be covered.
-
+% TODO
 % make rxgen brief mode the only mode
