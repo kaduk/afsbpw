@@ -68,7 +68,7 @@ Freshly released for EAKC 2014, but a quick recap:
 \item{Support for SASL binds in the LDAP KDB backend}
 \item{KDC listens on TCP by default}
 \item{KCM: cache type for Heimdal (e.g., OS X) compatibility}
-\item{Support for ulocked database dumps for the DB2 KDB backend, to allow
+\item{Support for unlocked database dumps for the DB2 KDB backend, to allow
 	the KDC and kadmind to continue processing requests during dumps}
 \end{itemize}
 \end{frame}
@@ -116,7 +116,7 @@ Is replay cache performance an issue for anyone here?  Please talk to us!
 MITKRB5-SA-2014-001:
 \begin{itemize}
 \item{CVE-2014-4345: Buffer overrun in kadmind with LDAP backend}
-\item{\verb+cpw -keepold+ triggere miscounding of array size}
+\item{\verb+cpw -keepold+ triggered miscounting of array size}
 \end{itemize}
 MITKRB5-SA-2015-001
 \begin{itemize}
@@ -226,9 +226,11 @@ MITKRB5-SA-2015-001
 \begin{itemize}
 \item{SPAKE preauth}
 	\begin{itemize}
-	\item{forward secrecy in generated session keys}
+	\item{prevents offline dictionary attack}
+	\item{forward secrecy in generated session keys (with respect to
+		the password-derived key)}
 	\item{option for two-factor as part of same exchange}
-	\item{When configured properly, attacker can't tell which factor was
+	\item{For simple second factors, attacker can't tell which factor was
 		wrong}
 	\end{itemize}
 \item{More progress on Python kerberos for testing?}
