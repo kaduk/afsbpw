@@ -2,6 +2,8 @@
 
 \usepackage{graphicx}
 \usepackage{beamerthemesplit}
+\usepackage{footnote}
+\usepackage[normalem]{ulem}
 \title{A path to OpenAFS 2.0: rxgk, IPv6, and more}
 \author{Benjamin Kaduk \\ \url{kaduk@mit.edu} \url{bkaduk@akamai.com}}
 \date{20 August, 2015}
@@ -17,6 +19,167 @@
 
 \frame{\titlepage}
 
+\section{Roadmap}
+
+\begin{frame}
+\frametitle{Things we want}
+\begin{itemize}
+\item{rxgk\hphantom{?}}
+\item{IPv6 support}
+\item{read-write replication}
+\item{per-file ACLs}
+\vphantom{\item{\ldots}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Things we get}
+\begin{itemize}
+\item{rxgk?}
+\pause
+\item{\sout{IPv6 support}}
+\pause
+\item{\sout{read-write replication}}
+\pause
+\item{\sout{per-file ACLs}}
+\pause
+\item{\ldots}
+\end{itemize}
+\end{frame}
+
+\subsection{History}
+
+\begin{frame}
+That's where we want to be (and where we think we'll actually be able to
+get to).
+
+\vspace{1em}
+In order to get there, we have to know where to start --- where are we
+coming from?
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{History}
+People have wanted rxgk for longer than I've been using AFS!
+
+\vspace{1em}
+Back in 2006, the Elders published
+\url{https://www.openafs.org/pages/no-more-des.html}.
+\begin{quote}
+After the 1.6 release, the build system will be modified to build OpenAFS
+without kaserver unless it is specifically requested.
+
+The OpenAFS Elders endorse the development of the rxk5 and rxgk security
+classes in order to enable the use of Kerberos 5 ciphers other than single DES
+for both authentication and data security between AFS clients and servers.
+
+When OpenAFS is capable of supporting Kerberos 5 with non-DES ciphers the
+major version number will be changed to "2".
+\end{quote
+\end{frame}
+
+\begin{frame}
+\frametitle{IPv6}
+\begin{itemize}
+\item{OpenAFS is getting left behind}
+\item{World is running out of v4 addresses}
+\item{IPv6 is more and more common
+	\begin{itemize}
+	\item{cell networks}
+	\item{home networks, too!}
+	\item{Some ISPs charging more for v4 service}
+	\end{itemize}
+}
+\item{v6 support is more than just replacing 32 bits with 128 bits}
+\pause
+\item{and more than just keeping both and a way to choose}
+\item{(but we do still need to bump the vldb format to do anything)}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{IPv6}
+I'm not an expert on IPv6 for AFS; talk to Jeff or Mike or Simon
+or some number of other people who know more.
+
+But\ldots
+\begin{itemize}
+\item{privacy addresses --- callbacks might not be deliverable!}
+\item{larger minimum packet sizes; rx must adapt its ideas of MTU handling}
+\item{Much larger physical packets possible, but rx jumbograms suck}
+\item{fragmentation is not automatic --- must be prepared to resend
+	in smaller chunks}
+\item{Will the OS let you get the ICMPv6 fragmentation needed notices?}
+\item{everybody becomes multihomed}
+\item{Many, many RPCs to update}
+\item{We're already ``in the middle of'' and RPC refresh \ldots for the
+	past five\footnote{may be more?} years}
+\item{rxdebug}
+\item{happy eyeballs}
+\end{itemize}
+\end{frame}
+
+\section{What's in 1.8?}
+
+\begin{frame}
+\frametitle{Why 1.8?}
+\begin{itemize}
+\item{\verb+openafs-stable-1_6_x+ was branched on August 10, 2010}
+\item{4658 commits on master since then, but only 2033 commits on
+1.6 since then.  (Most of the commits on 1.6 are cherry-picks from
+master, but not all; I didn't write the script to check.)
+\item{Those other 2.5k commits have some useful features in them!}
+\item{\verb+master+ is actually pretty usable right now; rxgk and
+whatnot will probably break things temporarily.  A new release gives
+a stable baseline to start from.}
+\item{We're also overdue for some breaking/intrusive changes that
+should only be done at a major release boundary.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{What's in 1.8?}
+Already on master:
+\begin{itemize}
+\item{Code cleanup (e.g., from static analyzers, compiler warnings fixes,
+and general refactoring) --- thanks, Simon!}
+\item{libtool in the build system for more reliable shared libraries,
+and other build system cleanup}
+\item{pthreaded dbservers}
+\item{Greatly reduced krb5 dependencies}
+\item{More reliable autoconf logic}
+\item{Windows stuff is quite different}
+\item{Some parts of the documentation are not embarassing}
+\item{\sout{Improvements} changes to the rx stack (again, thanks, Simon!)}
+\item{libroken and libhcrypto from Heimdal}
+\item{Cache bypass on Linux}
+\item{OpenAFS Portable Runtime (opr) --- thanks, Simon!}
+\item{Some afsd.fuse improvements}
+\item{cmd refactoring}
+\item{Something resembling a test suite framework}
+\item{New default for ihandle sync-ing behavior}
+\item{Jenkins hash in XXX}
+\item{Some bosserver refactoring}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{What's {\em not} in 1.8?}
+\begin{itemize}
+\item{kaserver (by default)}
+\item{pam modules (by default)}
+\item{Linux 2.4 support}
+\item{Documentation for AIX-, HP-UX, and IRIX-specific installation in the
+QuickStartGuide}
+\item{NFS translator}
+\item{A comprehensive test suite}
+\item{\verb+afsd -settime+}
+\item{\verb+libjuafs.a+ --- just use \verb+libuafs.a+}
+\item{LWP fileserver}
+\end{itemize}
+\end{frame}
+
+\section{Getting to 2.0}
 
 \begin{frame}
 \frametitle{}
@@ -24,3 +187,15 @@
 \end{frame}
 
 \end{document}
+
+% rxgk and IPv6 support have been discussed as highly desirable features for
+% AFS-3 implementations for many years now, but implementations in a
+% released version of OpenAFS remain elusive.  OpenAFS 2.0 has been defined
+% as the version which will include rxgk support for almost a decade, but
+% we're still not there yet.  This talk will summarize the current state of
+% affairs of rxgk and IPv6, what remains to bring them to OpenAFS, what else
+% might be included in a 2.0 release, and what will need to be done along
+% the way.  The path to 2.0 will go through a 1.8 series of stable Unix
+% releases, with its own set of new features, which will also be covered.
+
+% make rxgen brief mode the only mode
